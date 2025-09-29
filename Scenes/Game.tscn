@@ -153,7 +153,7 @@ offset_right = 480.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="OptionButton" type="OptionButton" parent="Game area/Kobolds/kobold swapping/Swapto" node_paths=PackedStringArray("item", "kM")]
+[node name="OptionButton" type="OptionButton" parent="Game area/Kobolds/kobold swapping/Swapto"]
 layout_mode = 1
 offset_top = 192.0
 offset_right = 320.0
@@ -165,20 +165,6 @@ popup/item_1/text = "Tavern"
 popup/item_1/id = 1
 popup/item_2/text = "guard"
 popup/item_2/id = 2
-script = ExtResource("2_7mcs4")
-item = NodePath("../ItemList")
-kM = NodePath("../../../../../Node")
-
-[node name="ItemList" type="ItemList" parent="Game area/Kobolds/kobold swapping/Swapto"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = 272.0
-offset_right = 320.0
-offset_bottom = 577.0
-grow_vertical = 0
-select_mode = 1
 
 [node name="Button" type="Button" parent="Game area/Kobolds/kobold swapping"]
 layout_mode = 0
@@ -187,4 +173,3 @@ offset_bottom = 32.0
 text = "========>"
 
 [connection signal="item_selected" from="Game area/Kobolds/kobold swapping/SwapFrom/OptionButton" to="Game area/Kobolds/kobold swapping/SwapFrom/OptionButton" method="a"]
-[connection signal="item_selected" from="Game area/Kobolds/kobold swapping/Swapto/OptionButton" to="Game area/Kobolds/kobold swapping/Swapto/OptionButton" method="a"]
