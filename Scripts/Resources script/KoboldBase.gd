@@ -11,7 +11,7 @@ class_name kobold
 @export var sex:bool
 
 #basic stats
-@export var str:Big
+@export var stre:Big
 @export var dex:Big
 @export var con:Big
 @export var wis:Big

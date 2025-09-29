@@ -1,7 +1,64 @@
-[gd_scene load_steps=3 format=3 uid="uid://bj8mw8apgv0mj"]
+[gd_scene load_steps=11 format=3 uid="uid://bj8mw8apgv0mj"]
 
-[ext_resource type="Script" path="res://Scripts/KoboldPlacements.gd" id="1_ae2s2"]
-[ext_resource type="Script" path="res://Scripts/TestItemlist.gd" id="2_bufac"]
+[ext_resource type="Script" path="res://Scripts/Koboldmanager.gd" id="1_ae2s2"]
+[ext_resource type="Script" path="res://Scripts/fieldSelector.gd" id="2_7mcs4"]
+[ext_resource type="Script" path="res://Scripts/Resources script/KoboldBase.gd" id="2_vaw38"]
+
+[sub_resource type="Resource" id="Resource_r25rb"]
+script = ExtResource("2_vaw38")
+n = "4"
+mainColor = Color(0, 0, 0, 1)
+secondaryColor = Color(0, 0, 0, 1)
+eyeColor = Color(0, 0, 0, 1)
+sex = false
+
+[sub_resource type="Resource" id="Resource_356sp"]
+script = ExtResource("2_vaw38")
+n = "56"
+mainColor = Color(0, 0, 0, 1)
+secondaryColor = Color(0, 0, 0, 1)
+eyeColor = Color(0, 0, 0, 1)
+sex = false
+
+[sub_resource type="Resource" id="Resource_2x8v7"]
+script = ExtResource("2_vaw38")
+n = "3"
+mainColor = Color(0, 0, 0, 1)
+secondaryColor = Color(0, 0, 0, 1)
+eyeColor = Color(0, 0, 0, 1)
+sex = false
+
+[sub_resource type="Resource" id="Resource_j4dl0"]
+script = ExtResource("2_vaw38")
+n = "a"
+mainColor = Color(0, 0, 0, 1)
+secondaryColor = Color(0, 0, 0, 1)
+eyeColor = Color(0, 0, 0, 1)
+sex = false
+
+[sub_resource type="Resource" id="Resource_rxsop"]
+script = ExtResource("2_vaw38")
+n = "hb"
+mainColor = Color(0, 0, 0, 1)
+secondaryColor = Color(0, 0, 0, 1)
+eyeColor = Color(0, 0, 0, 1)
+sex = false
+
+[sub_resource type="Resource" id="Resource_2d8g0"]
+script = ExtResource("2_vaw38")
+n = "ng"
+mainColor = Color(0, 0, 0, 1)
+secondaryColor = Color(0, 0, 0, 1)
+eyeColor = Color(0, 0, 0, 1)
+sex = false
+
+[sub_resource type="Resource" id="Resource_grcm8"]
+script = ExtResource("2_vaw38")
+n = "ysd"
+mainColor = Color(0, 0, 0, 1)
+secondaryColor = Color(0, 0, 0, 1)
+eyeColor = Color(0, 0, 0, 1)
+sex = false
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -11,6 +68,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Node" type="Node" parent="."]
+script = ExtResource("1_ae2s2")
+tavernWorkers = Array[ExtResource("2_vaw38")]([SubResource("Resource_r25rb")])
+unusedkobolds = Array[ExtResource("2_vaw38")]([SubResource("Resource_356sp"), SubResource("Resource_2x8v7")])
+guards = Array[ExtResource("2_vaw38")]([SubResource("Resource_j4dl0"), SubResource("Resource_rxsop"), SubResource("Resource_2d8g0"), SubResource("Resource_grcm8")])
+
 [node name="Game area" type="TabContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -19,6 +82,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 current_tab = 3
+drag_to_rearrange_enabled = true
 
 [node name="Tavern" type="Control" parent="Game area"]
 visible = false
@@ -39,15 +103,36 @@ metadata/_tab_index = 2
 layout_mode = 2
 metadata/_tab_index = 3
 
-[node name="Node" type="Node" parent="Game area/Kobolds"]
-script = ExtResource("1_ae2s2")
-
-[node name="Control" type="Control" parent="Game area/Kobolds"]
+[node name="kobold swapping" type="Control" parent="Game area/Kobolds"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ItemList" type="ItemList" parent="Game area/Kobolds/Control"]
+[node name="SwapFrom" type="Control" parent="Game area/Kobolds/kobold swapping"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OptionButton" type="OptionButton" parent="Game area/Kobolds/kobold swapping/SwapFrom" node_paths=PackedStringArray("item", "kM")]
+layout_mode = 1
+offset_top = 192.0
+offset_right = 320.0
+offset_bottom = 232.0
+item_count = 3
+popup/item_0/text = "Unused"
+popup/item_0/id = 0
+popup/item_1/text = "Tavern"
+popup/item_1/id = 1
+popup/item_2/text = "guard"
+popup/item_2/id = 2
+script = ExtResource("2_7mcs4")
+item = NodePath("../ItemList")
+kM = NodePath("../../../../../Node")
+
+[node name="ItemList" type="ItemList" parent="Game area/Kobolds/kobold swapping/SwapFrom"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -57,11 +142,49 @@ offset_right = 320.0
 offset_bottom = 577.0
 grow_vertical = 0
 select_mode = 1
-item_count = 4
-item_0/text = "asddadaasd"
-item_1/text = "asdasssdfggdadad"
-item_2/text = "f"
-item_3/text = "g"
-script = ExtResource("2_bufac")
 
-[connection signal="multi_selected" from="Game area/Kobolds/Control/ItemList" to="Game area/Kobolds/Control/ItemList" method="_on_multi_selected"]
+[node name="Swapto" type="Control" parent="Game area/Kobolds/kobold swapping"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 480.0
+offset_right = 480.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OptionButton" type="OptionButton" parent="Game area/Kobolds/kobold swapping/Swapto" node_paths=PackedStringArray("item", "kM")]
+layout_mode = 1
+offset_top = 192.0
+offset_right = 320.0
+offset_bottom = 232.0
+item_count = 3
+popup/item_0/text = "Unused"
+popup/item_0/id = 0
+popup/item_1/text = "Tavern"
+popup/item_1/id = 1
+popup/item_2/text = "guard"
+popup/item_2/id = 2
+script = ExtResource("2_7mcs4")
+item = NodePath("../ItemList")
+kM = NodePath("../../../../../Node")
+
+[node name="ItemList" type="ItemList" parent="Game area/Kobolds/kobold swapping/Swapto"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 272.0
+offset_right = 320.0
+offset_bottom = 577.0
+grow_vertical = 0
+select_mode = 1
+
+[node name="Button" type="Button" parent="Game area/Kobolds/kobold swapping"]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 32.0
+text = "========>"
+
+[connection signal="item_selected" from="Game area/Kobolds/kobold swapping/SwapFrom/OptionButton" to="Game area/Kobolds/kobold swapping/SwapFrom/OptionButton" method="a"]
+[connection signal="item_selected" from="Game area/Kobolds/kobold swapping/Swapto/OptionButton" to="Game area/Kobolds/kobold swapping/Swapto/OptionButton" method="a"]
