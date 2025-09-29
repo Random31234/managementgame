@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj8mw8apgv0mj"]
+[gd_scene load_steps=3 format=3 uid="uid://bj8mw8apgv0mj"]
 
-[ext_resource type="Script" path="res://KoboldPlacements.gd" id="1_ae2s2"]
+[ext_resource type="Script" path="res://Scripts/KoboldPlacements.gd" id="1_ae2s2"]
+[ext_resource type="Script" path="res://Scripts/TestItemlist.gd" id="2_bufac"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -40,3 +41,27 @@ metadata/_tab_index = 3
 
 [node name="Node" type="Node" parent="Game area/Kobolds"]
 script = ExtResource("1_ae2s2")
+
+[node name="Control" type="Control" parent="Game area/Kobolds"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ItemList" type="ItemList" parent="Game area/Kobolds/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 272.0
+offset_right = 320.0
+offset_bottom = 577.0
+grow_vertical = 0
+select_mode = 1
+item_count = 4
+item_0/text = "asddadaasd"
+item_1/text = "asdasssdfggdadad"
+item_2/text = "f"
+item_3/text = "g"
+script = ExtResource("2_bufac")
+
+[connection signal="multi_selected" from="Game area/Kobolds/Control/ItemList" to="Game area/Kobolds/Control/ItemList" method="_on_multi_selected"]
